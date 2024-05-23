@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart | Bloom's Naturals</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/logoIcon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+</head>
+<body>
+    <div id="header">
+        <div class="logo">
+            <a href="../index.html"><img src="../assets/logo1-1.png" width="305px" height="105px"></a>
+        </div>
+        <div id="navbar">
+            <ul>
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="productsPage.html">PRODUCTS</a></li>
+                <li><a href="contactUs.html">CONTACT US</a></li>
+                <li><a href="aboutUs.html">ABOUT US</a></li>
+                <li><a href="cart.html"><i class="bx bx-cart-alt"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="wrapper-items-cart">
+        <br><br><br><br><br><br><br>
+        <h1>Your Cart</h1>
+        <div id="cart-items"></div>
+        <h2 id="cart-total"></h2>
+        <button onclick="clearCart()" class="button">Clear All</button>
+        <h3 id="backOption"><a id="checkoutLink" href="checkout.html">PROCEED TO CHECKOUT</a></h3>
+    </div>
+ 
+    <div id="footer">
+        <div class="logo">
+            <img src="../assets/logo-1.png" width="125px" height="105px">
+        </div>
+        <div id="copyright">
+            <p>@2020 BLOOM'S NATURALS</p>
+        </div>
+    </div>
+
+    <script>
+        function displayCart() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let cartItems = document.getElementById('cart-items');
+            let cartTotal = document.getElementById('cart-total');
+            let checkoutLink = document.getElementById('checkoutLink');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty.</p>';
+                cartTotal.innerHTML = '';
+                checkoutLink.style.pointerEvents = 'none';
+                checkoutLink.style.color = '#999';
+            } else {
+                let cartHTML = '<div class="cart-list">';
+                let total = 0;
+                cart.forEach(item => {
+                    let itemTotal = item.price * item.quantity;
+                    cartHTML += `
+                        <div class="cart-item">
+                            <div class="item-info">
+                                <div class="item-name">${item.name}</div>
+                                <div class="item-quantity">Quantity: ${item.quantity}</div>
+                                <div class="item-price">Price: ₱${item.price}</div>
+                            </div>
+                            <div class="item-total">Total: ₱${itemTotal}</div>
+                        </div>
+                    `;
+                    total += itemTotal;
+                });
+                cartHTML += '</div>';
+                cartItems.innerHTML = cartHTML;
+                cartTotal.innerHTML = `Total: ₱${total}`;
+                checkoutLink.style.pointerEvents = 'auto';
+                checkoutLink.style.color = '#eaa5a8';
+            }
+        }
+
+        function clearCart() {
+            localStorage.removeItem('cart');
+            displayCart();
+            alert('Cart has been cleared!');
+        }
+
+        window.onload = displayCart;
+    </script>
+</body>
+</html>

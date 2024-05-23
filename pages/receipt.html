@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt | Bloom's Naturals</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/logoIcon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+    <style>
+        .receipt-container{
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .receipt-container h1{
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .receipt-container h3{
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 27px;
+        }
+
+        .receipt-details{
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .receipt-details p{
+            margin: 5px 0;
+            text-align: center;
+        }
+
+        .receipt-details p b{
+            font-weight: bold;
+        }
+
+        .receipt-items{
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .receipt-item{
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .receipt-item:last-child{
+            border-bottom: none;
+        }
+
+        .total-price{
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="logo">
+            <a href="../index.html"><img src="../assets/logo1-1.png" width="305px" height="105px"></a>
+        </div>
+        <div id="navbar">
+            <ul>
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="productsPage.html">PRODUCTS</a></li>
+                <li><a href="contactUs.html">CONTACT US</a></li>
+                <li><a href="aboutUs.html">ABOUT US</a></li>
+                <li><a href="cart.html"><i class="bx bx-cart-alt"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="receipt-container">
+        <br><br><br><br>
+        <h1>RECEIPT</h1>
+
+        <br>
+
+        <div class="receipt-details">
+            <h3>Customer Details</h3>
+            <p><b>Name:</b> <span id="customerName"></span></p>
+            <p><b>Address:</b> <span id="customerAddress"></span></p>
+            <p><b>Contact Number:</b> <span id="customerContact"></span></p>
+        </div>
+
+        <hr style="border: 1px solid black;">
+
+        <div class="receipt-items">
+            <h3>Cart Items</h3>
+            <div id="cartItems"></div>
+            <div class="total-price" id="totalPrice"></div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <div class="logo">
+            <img src="../assets/logo-1.png" width="125px" height="105px">
+        </div>
+        <div id="copyright">
+            <p>@2020 BLOOM'S NATURALS</p>
+        </div>
+    </div>
+
+    <script>
+        var customerName = localStorage.getItem('customerName');
+        var customerAddress = localStorage.getItem('customerAddress');
+        var customerContact = localStorage.getItem('customerContact');
+
+        document.getElementById('customerName').innerText = customerName;
+        document.getElementById('customerAddress').innerText = customerAddress;
+        document.getElementById('customerContact').innerText = customerContact;
+
+        var cartItems = JSON.parse(localStorage.getItem('cart'));
+
+        // Display cart items on the receipt
+        var cartItemsHTML = '';
+        var totalPrice = 0;
+        cartItems.forEach(function(item) {
+            cartItemsHTML += `
+                <div class="receipt-item">
+                    <p><b>Name:</b> ${item.name}</p>
+                    <p><b>Price:</b> ₱${item.price}</p>
+                    <p><b>Quantity:</b> ${item.quantity}</p>
+                </div>
+            `;
+            totalPrice += item.price * item.quantity;
+        });
+        document.getElementById('cartItems').innerHTML = cartItemsHTML;
+
+        document.getElementById('totalPrice').innerText = 'Total Price: ₱' + totalPrice.toFixed(2);
+
+        localStorage.removeItem('cart');
+    </script>
+</body>
+</html>

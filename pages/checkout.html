@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Bloom's Naturals</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/logoIcon.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+</head>
+<body>
+    <div id="header">
+        <div class="logo">
+            <a href="../index.html"><img src="../assets/logo1-1.png" width="305px" height="105px"></a>
+        </div>
+        <div id="navbar">
+            <ul>
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="productsPage.html">PRODUCTS</a></li>
+                <li><a href="contactUs.html">CONTACT US</a></li>
+                <li><a href="aboutUs.html">ABOUT US</a></li>
+                <li><a href="cart.html"><i class="bx bx-cart-alt"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="wrapper-items-checkout">
+        <br><br><br><br><br><br>
+        <h1>Checkout</h1>
+        <form id="checkout-form" onsubmit="return submitCheckout()">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea><br><br>
+
+            <label for="contact">Contact Number:</label>
+            <input type="text" id="contact" name="contact" required><br><br>
+
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+
+    <div id="footer">
+        <div class="logo">
+            <img src="../assets/logo-1.png" width="125px" height="105px">
+        </div>
+        <div id="copyright">
+            <p>@2020 BLOOM'S NATURALS</p>
+        </div>
+    </div>
+
+    <script>
+        function submitCheckout() {
+            // Get user input
+            var name = document.getElementById('name').value;
+            var address = document.getElementById('address').value;
+            var contact = document.getElementById('contact').value;
+
+            localStorage.setItem('customerName', name);
+            localStorage.setItem('customerAddress', address);
+            localStorage.setItem('customerContact', contact);
+
+            window.location.href = 'receipt.html';
+
+            return false;
+        }
+    </script>
+</body>
+</html>
