@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ultimate Birthday Package (Bouquet+Cake+Balloon)</title>
+	<link rel="shortcut icon" type="image/png" href="../assets/logoIcon.png">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/styles.css">
+</head>
+<body>
+	<div id="header">
+		<div class="logo">
+			<a href="../index.html"><img src="../assets/logo1-1.png" width="305px" height="105px"></a>
+		</div>
+		<div id="navbar">
+			<ul>
+				<li><a href="../index.html">HOME</a></li>
+				<li><a href="productsPage.html">PRODUCTS</a></li>
+				<li><a href="contactUs.html">CONTACT US</a></li>
+				<li><a href="aboutUs.html">ABOUT US</a></li>
+				<li><a href="cart.html"><i class="bx bx-cart-alt"></i></a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="wrapper-items">
+		<br><br><br><br><br><br><br><br><br>
+		<div id="main-items">
+			<img src="../assets/bf2.png" id="main-pic" width="453px" height="450px">
+
+			<table id="main-table" width="600px" align="right">
+				<tr>
+					<td><h1>ULTIMATE BIRTHDAY PACKAGE (BOUQUET+CAKE+BALLOON)</h1></td>
+				</tr>
+
+				<tr>
+					<td><b>PRICE: ₱1,690</b></td>
+				</tr>
+
+				<tr>
+					<td>
+						<div class="ex3">
+							<label for="item-3"><b>PRODUCT DESCRIPTION</b></label>
+ 							<input type="checkbox" name="one" id="item-3">
+ 							<div class="hide3">
+    							<div class="inner3">
+      								<p>This ultimate birthday package is the ideal gift for your loved ones as it comes with all the sweet things one can imagine:
+      							<br><br>
+									1 x Rose Flower Bouquet (Red Roses, White Statice, Tea Leafs)
+								<br><br>
+									1 x Junior Red Ribbon Chocolate Birthday Cake including dedication
+								<br><br>
+									1 x Cheerful Birthday Balloon filled with air (approx. 40cm)</p>
+    							</div>
+  							</div>
+  						</div>
+					</td>
+				</tr>
+
+				<tr>
+                    <td>
+                        <b>QUANTITY:</b> <input type="number" id="quantity" value="1" min="1">
+                    </td>
+                </tr>
+
+				<tr>
+                    <td>
+                        <center><button onclick="addToCart()" class="button">ADD TO CART</button></center>
+                    </td>
+                </tr>
+
+				<tr>
+					<td>
+						<h2 align="center"><span class="diff-page"><a href="bf2.html"><</a>&nbsp; 3 &nbsp;<span class="diff-page"><a href="bf4.html">></a></span></h2>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+			<br>
+			<h3 id="backOption"><a href="../index.html">BACK TO MAIN PAGE</a></h3>
+	</div>
+
+	<div id="footer">
+		<div class="logo">
+			<img src="../assets/logo-1.png" width="125px" height="105px">
+		</div>
+		<div id="copyright">
+			<p>@2020 BLOOM'S NATURALS</p>
+		</div>
+	</div>
+
+	<script>
+        function addToCart() {
+            let name = "ULTIMATE BIRTHDAY PACKAGE (BOUQUET+CAKE+BALLOON)";
+            let price = 1690;
+            let quantity = parseInt(document.getElementById('quantity').value);
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let existingItemIndex = cart.findIndex(item => item.name === name);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push({ name, price, quantity });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert('Item added to cart!');
+        }
+    </script>
+
+</body>
+</html>
